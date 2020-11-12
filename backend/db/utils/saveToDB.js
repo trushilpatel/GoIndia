@@ -1,5 +1,5 @@
 require("dotenv").config({ path: "../../.env" })
-const sequelize = require("../sequelize")
+const { Tickets } = require("../sequelize")
 const claimedTickets = require("./data/claimedTickets")
 const unclaimedTickets = require("./data/unclaimedTickets")
 
@@ -12,12 +12,12 @@ async function saveToDB() {
 async function saveTickets() {
 	await Promise.all(
 		claimedTickets.map((ticket) =>
-			sequelize.ticketsModel.build({ ticket }).save()
+			Tickets.build({ ticket }).save()
 		)
 	)
 	await Promise.all(
 		unclaimedTickets.map((ticket) =>
-			sequelize.ticketsModel.build({ ticket }).save()
+			Tickets.build({ ticket }).save()
 		)
 	)
 }
