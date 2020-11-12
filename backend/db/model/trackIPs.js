@@ -1,7 +1,7 @@
 const DataTypes = require("sequelize").DataTypes
 
 module.exports = {
-	modelName: "Tickets",
+	modelName: "TrackIPs",
 	attributes: {
 		id: {
 			type: DataTypes.INTEGER,
@@ -10,15 +10,21 @@ module.exports = {
 			autoIncrement: true,
 			field: "id",
 		},
-		ticket: {
-			type: DataTypes.STRING(30),
+		ip: {
+			type: DataTypes.STRING(20),
 			allowNull: false,
 			unique: true,
-			field: "ticket",
+			field: "ip",
+		},
+		visits: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 1,
+			field: 'visits',
 		},
 	},
 	options: {
-		tableName: "tickets",
+		tableName: "trackips",
 		freezeTableName: true,
 		timestamps: true,
 	},

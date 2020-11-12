@@ -11,8 +11,9 @@ module.exports = {
 			field: "id",
 		},
 		email: {
-			type: DataTypes.STRING,
+			type: DataTypes.STRING(30),
 			allowNull: false,
+			unique: true,
 			field: "email",
 		},
 	},

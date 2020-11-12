@@ -1,4 +1,4 @@
-const { ticketsModel } = require("../../db/sequelize")
+const { Tickets } = require("../../db/sequelize")
 
 let totalTickets = 0
 
@@ -7,9 +7,8 @@ async function getRandomTicket(req, res) {
 		totalTickets = await getNumberOfTotalTickets()
 		console.log("TOTAL TICKETS", totalTickets)
 	}
-	console.log("GET ALL TICKETS")
 	res.json(
-		await ticketsModel.findOne({
+		await Tickets.findOne({
 			where: {
 				id: Math.floor(Math.random() * totalTickets),
 			},
@@ -20,7 +19,7 @@ async function getRandomTicket(req, res) {
 async function saveTicket(req, res) {
 	console.log("SAVE TICKET", req.body)
 	try {
-		await ticketsModel.build(req.body).save()
+		await Tickets.build(req.body).save()
 		totalTickets++
 		console.log("TOTAL TICKETS", totalTickets)
 	} catch (err) {
@@ -30,7 +29,7 @@ async function saveTicket(req, res) {
 }
 
 async function getNumberOfTotalTickets() {
-	return await ticketsModel.count()
+	return await Tickets.count()
 }
 module.exports = {
 	getRandomTicket,
