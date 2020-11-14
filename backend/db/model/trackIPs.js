@@ -16,11 +16,17 @@ module.exports = {
 			unique: true,
 			field: "ip",
 		},
-		visits: {
+		websiteHits: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 			defaultValue: 1,
-			field: 'visits',
+			field: "websitehits",
+		},
+		apiHits: {
+			type: DataTypes.INTEGER,
+			allowNull: false,
+			defaultValue: 0,
+			field: "apihits",
 		},
 	},
 	options: {
