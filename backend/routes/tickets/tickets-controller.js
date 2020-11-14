@@ -22,10 +22,10 @@ async function saveTicket(req, res) {
 		await Tickets.build(req.body).save()
 		totalTickets++
 		console.log("TOTAL TICKETS", totalTickets)
+    res.send("DONE")
 	} catch (err) {
 		res.send("ERROR")
 	}
-	res.send("DONE")
 }
 
 async function getNumberOfTotalTickets() {
