@@ -3,7 +3,7 @@
 		<v-app-bar :dense="true" app>
 			<v-toolbar-title large>
 				<span class="gGreen--text pl-5 title">
-					Offeriez
+					OFFERIEZ
 				</span>
 			</v-toolbar-title>
 		</v-app-bar>
