@@ -7,7 +7,8 @@
 			<v-card-text>
 				<div class="my-5 py-5">
 					<v-row>
-						<span class="px-10 ml-auto mr-auto px-5 subtitle-1 gRed--text mb-5 text-center"
+						<span
+							class="px-10 ml-auto mr-auto px-5 subtitle-1 gRed--text mb-5 text-center"
 							>Giving 100 rare tickets everyday!!! Claim yours now...</span
 						>
 					</v-row>
@@ -386,13 +387,6 @@ export default {
 			text: "https://gpay.app.goo.gl/jquEog",
 		},
 		copied: false,
-		atOptions: {
-			key: "8e94104f5af11aab666782fac71d9a25",
-			format: "iframe",
-			height: 250,
-			width: 300,
-			params: {},
-		},
 	}),
 	validations: {
 		sharedLink: {
