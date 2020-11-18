@@ -30,10 +30,7 @@
 							color="gBlue"
 							class="px-10 mt-5 ml-auto mr-auto"
 							elevation="7"
-							@click="
-								;(requestTicketDialog = true),
-									(show_ADS_direct_link = !show_ADS_direct_link)
-							"
+							@click="requestTicketDialog = true"
 						>
 							<span class="white--text">Request Ticket</span></v-btn
 						>
@@ -153,208 +150,208 @@
 										2. Do a bank transfer on Google pay.
 									</p>
 
-                  <p>3. Pay to another user's UPI id.</p>
-                  <p>4. Gift ticket to friend.</p>
-                </div>
-              </div>
-              <div>
-                <header class="subtitle-2">For more information</header>
-                <div class="pl-3 pt-3">
-                  <p>
-                    visit the google official help article or read the terms and
-                    conditions in Google Pay app or visit the link below.
-                  </p>
-                  <a
-                    href="https://support.google.com/pay/india/answer/10125383"
-                    target="_blank"
-                    >https://support.google.com/pay/india/answer/10125383</a
-                  >
-                </div>
-              </div>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-expansion-panels>
-        <v-dialog v-model="processingDialog" persistent width="400">
-          <v-card color="primary overline " dark>
-            <v-card-text class="pt-3">
-              Please stand by
-              <v-progress-linear
-                indeterminate
-                color="white"
-                class="my-3 light--text"
-              ></v-progress-linear>
-            </v-card-text>
-          </v-card>
-        </v-dialog>
-        <v-dialog v-model="shareLinkDialog" persistent width="400">
-          <v-card>
-            <v-card-title class="subtitle green mb-5 white--text">
-              First Share your extra ticket here...
-            </v-card-title>
-            <v-card-text>
-              <v-text-field
-                v-model.trim="sharedLink"
-                label="Enter Link"
-                placeholder="https://gpay.app.goo.gl/******"
-                outlined
-                :error="$v.sharedLink.$dirty && $v.sharedLink.$invalid"
-                :dense="true"
-                hide-details="auto"
-                @click="$v.sharedLink.$touch()"
-              ></v-text-field>
-              <p class="gRed--text text-justify mt-3 mb-0 pb-1 pl-3">
-                * Enter the link parth only.
-              </p>
-              <p class="gRed--text text-justify mb-0 pl-3">
-                * Don't paste entire message.
-              </p>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                color="green darken-1"
-                text
-                :disabled="$v.sharedLink.$invalid"
-                @click="saveSharedTicket()"
-              >
-                Next
-              </v-btn>
-              <v-btn
-                color="green darken-1"
-                text
-                @click="(shareLinkDialog = false), $v.$reset();"
-              >
-                Close
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <v-dialog v-model="requestTicketDialog" persistent width="400">
-          <v-card>
-            <v-card-title class="subtitle green mb-5 white--text">
-              Request Tickets...
-            </v-card-title>
-            <v-card-text v-if="!showEmailDialog">
-              <v-checkbox
-                v-for="ticket in rareTickets"
-                :key="ticket"
-                v-model="requestedTickets"
-                :label="ticket"
-                :value="ticket"
-              ></v-checkbox>
-            </v-card-text>
-            <v-card-text v-if="showEmailDialog">
-              <v-text-field
-                v-model.trim="userEmail"
-                label="Enter Your email"
-                outlined
-                :error="$v.userEmail.$dirty && $v.userEmail.$invalid"
-                type="email"
-                :dense="true"
-                hide-details="auto"
-                @click="$v.userEmail.$touch()"
-              ></v-text-field>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                v-if="!showEmailDialog"
-                color="green darken-1"
-                text
-                :disabled="!requestedTickets.length"
-                @click="showEmailDialog = true"
-              >
-                Next </v-btn
-              ><v-btn
-                v-if="showEmailDialog"
-                color="green darken-1"
-                text
-                :disabled="$v.userEmail.$invalid"
-                @click="
-                  saveRequestedTickets();
-                  $v.$reset();
-                "
-              >
-                Request
-              </v-btn>
-              <v-btn
-                color="green darken-1"
-                text
-                @click="
-                  (requestTicketDialog = false), (showEmailDialog = false);
-                  requestedTickets.splice(0, requestedTickets.length);
-                "
-              >
-                Close
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <v-dialog v-model="message.show" persistent width="400">
-          <v-card>
-            <v-card-title class="primary white--text">
-              Hurray, Here is your Ticket...
-            </v-card-title>
-            <v-card-text class="pt-5 mt-3 glow">
-              <v-text-field
-                placeholder="Placeholder"
-                outlined
-                :value="message.text"
-                @click="copyLink()"
-                ref="textToCopy"
-              >
-                <v-icon slot="append" @click="copyLink()"
-                  >mdi-checkbox-multiple-blank-outline</v-icon
-                >
-              </v-text-field>
-              <p class="gRed--text text-justify pb-2 mb-0">
-                *If you are getting claimed tickets then we request you to come
-                back tomorrow.
-              </p>
-              <p class="gRed--text text-justify">
-                *We update our database daily.
-              </p>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="primary" large @click="message.show = false">
-                Close
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <v-snackbar v-model="copied" :timeout="2000">
-          Link Copied Successfully...
-          <template v-slot:action="{ attrs }">
-            <v-btn color="blue" text v-bind="attrs" @click="copied = false">
-              Close
-            </v-btn>
-          </template>
-        </v-snackbar>
-        <v-snackbar
-          v-model="snackbar.show"
-          :color="snackbar.color"
-          :timeout="2000"
-        >
-          {{ snackbar.text }}
-          <template v-slot:action="{ attrs }">
-            <v-btn
-              color="white"
-              text
-              v-bind="attrs"
-              @click="snackbar.show = false"
-            >
-              Close
-            </v-btn>
-          </template>
-        </v-snackbar>
-      </v-card-text>
-    </v-card>
-  </v-main>
+									<p>3. Pay to another user's UPI id.</p>
+									<p>4. Gift ticket to friend.</p>
+								</div>
+							</div>
+							<div>
+								<header class="subtitle-2">For more information</header>
+								<div class="pl-3 pt-3">
+									<p>
+										visit the google official help article or read the terms and
+										conditions in Google Pay app or visit the link below.
+									</p>
+									<a
+										href="https://support.google.com/pay/india/answer/10125383"
+										target="_blank"
+										>https://support.google.com/pay/india/answer/10125383</a
+									>
+								</div>
+							</div>
+						</v-expansion-panel-content>
+					</v-expansion-panel>
+				</v-expansion-panels>
+				<v-dialog v-model="processingDialog" persistent width="400">
+					<v-card color="primary overline " dark>
+						<v-card-text class="pt-3">
+							Please stand by
+							<v-progress-linear
+								indeterminate
+								color="white"
+								class="my-3 light--text"
+							></v-progress-linear>
+						</v-card-text>
+					</v-card>
+				</v-dialog>
+				<v-dialog v-model="shareLinkDialog" persistent width="400">
+					<v-card>
+						<v-card-title class="subtitle green mb-5 white--text">
+							First Share your extra ticket here...
+						</v-card-title>
+						<v-card-text>
+							<v-text-field
+								v-model.trim="sharedLink"
+								label="Enter Link"
+								placeholder="https://gpay.app.goo.gl/******"
+								outlined
+								:error="$v.sharedLink.$dirty && $v.sharedLink.$invalid"
+								:dense="true"
+								hide-details="auto"
+								@click="$v.sharedLink.$touch()"
+							></v-text-field>
+							<p class="gRed--text text-justify mt-3 mb-0 pb-1 pl-3">
+								* Enter the link part only.
+							</p>
+							<p class="gRed--text text-justify mb-0 pl-3">
+								* Don't paste entire message.
+							</p>
+						</v-card-text>
+						<v-card-actions>
+							<v-spacer></v-spacer>
+							<v-btn
+								color="green darken-1"
+								text
+								:disabled="$v.sharedLink.$invalid"
+								@click="saveSharedTicket()"
+							>
+								Next
+							</v-btn>
+							<v-btn
+								color="green darken-1"
+								text
+								@click=";(shareLinkDialog = false), $v.$reset()"
+							>
+								Close
+							</v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-dialog>
+				<v-dialog v-model="requestTicketDialog" persistent width="400">
+					<v-card>
+						<v-card-title class="subtitle green mb-5 white--text">
+							Request Tickets...
+						</v-card-title>
+						<v-card-text v-if="!showEmailDialog">
+							<v-checkbox
+								v-for="ticket in rareTickets"
+								:key="ticket"
+								v-model="requestedTickets"
+								:label="ticket"
+								:value="ticket"
+							></v-checkbox>
+						</v-card-text>
+						<v-card-text v-if="showEmailDialog">
+							<v-text-field
+								v-model.trim="userEmail"
+								label="Enter Your email"
+								outlined
+								:error="$v.userEmail.$dirty && $v.userEmail.$invalid"
+								type="email"
+								:dense="true"
+								hide-details="auto"
+								@click="$v.userEmail.$touch()"
+							></v-text-field>
+						</v-card-text>
+						<v-card-actions>
+							<v-spacer></v-spacer>
+							<v-btn
+								v-if="!showEmailDialog"
+								color="green darken-1"
+								text
+								:disabled="!requestedTickets.length"
+								@click="showEmailDialog = true"
+							>
+								Next </v-btn
+							><v-btn
+								v-if="showEmailDialog"
+								color="green darken-1"
+								text
+								:disabled="$v.userEmail.$invalid"
+								@click="
+									saveRequestedTickets()
+									$v.$reset()
+								"
+							>
+								Request
+							</v-btn>
+							<v-btn
+								color="green darken-1"
+								text
+								@click="
+									;(requestTicketDialog = false), (showEmailDialog = false)
+									requestedTickets.splice(0, requestedTickets.length)
+								"
+							>
+								Close
+							</v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-dialog>
+				<v-dialog v-model="message.show" persistent width="400">
+					<v-card>
+						<v-card-title class="primary white--text">
+							Hurray, Here is your Ticket...
+						</v-card-title>
+						<v-card-text class="pt-5 mt-3 glow">
+							<v-text-field
+								placeholder="Placeholder"
+								outlined
+								:value="message.text"
+								@click="copyLink()"
+								ref="textToCopy"
+							>
+								<v-icon slot="append" @click="copyLink()"
+									>mdi-checkbox-multiple-blank-outline</v-icon
+								>
+							</v-text-field>
+							<p class="gRed--text text-justify pb-2 mb-0">
+								*If you are getting claimed tickets then we request you to come
+								back tomorrow.
+							</p>
+							<p class="gRed--text text-justify">
+								*We update our database daily.
+							</p>
+						</v-card-text>
+						<v-card-actions>
+							<v-spacer></v-spacer>
+							<v-btn color="primary" large @click="message.show = false">
+								Close
+							</v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-dialog>
+				<v-snackbar v-model="copied" :timeout="2000">
+					Link Copied Successfully...
+					<template v-slot:action="{ attrs }">
+						<v-btn color="blue" text v-bind="attrs" @click="copied = false">
+							Close
+						</v-btn>
+					</template>
+				</v-snackbar>
+				<v-snackbar
+					v-model="snackbar.show"
+					:color="snackbar.color"
+					:timeout="2000"
+				>
+					{{ snackbar.text }}
+					<template v-slot:action="{ attrs }">
+						<v-btn
+							color="white"
+							text
+							v-bind="attrs"
+							@click="snackbar.show = false"
+						>
+							Close
+						</v-btn>
+					</template>
+				</v-snackbar>
+			</v-card-text>
+		</v-card>
+	</v-main>
 </template>
 
 <script>
-import { email, required } from "vuelidate/lib/validators";
+import { email, required } from "vuelidate/lib/validators"
 export default {
 	name: "LinksSection",
 	data: () => ({
@@ -385,7 +382,6 @@ export default {
 			text: "https://gpay.app.goo.gl/jquEog",
 		},
 		copied: false,
-		show_ADS_direct_link: false,
 	}),
 	validations: {
 		sharedLink: {
@@ -397,16 +393,6 @@ export default {
 			email: email,
 		},
 	},
-	watch: {
-		show_ADS_direct_link: function() {
-			if (this.show_ADS_direct_link) {
-				window.open(
-					"https://www.profitablecpmnetwork.com/idpgwnfh?key=c972ab790d274d50884428ed9b781f8a",
-					"_blank"
-				)
-			}
-		},
-	},
 	methods: {
 		getEmail() {},
 		async saveSharedTicket() {
@@ -414,86 +400,86 @@ export default {
 			this.processingDialog = true
 			setTimeout(() => (this.processingDialog = false), 2000)
 
-      const response = await (
-        await fetch(process.env.VUE_APP_BASEURL + "api/ticket", {
-          method: "POST",
-          body: JSON.stringify({
-            ticket: this.sharedLink,
-          }),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        })
-      ).text();
+			const response = await (
+				await fetch(process.env.VUE_APP_BASEURL + "api/ticket", {
+					method: "POST",
+					body: JSON.stringify({
+						ticket: this.sharedLink,
+					}),
+					headers: {
+						"Content-type": "application/json; charset=UTF-8",
+					},
+				})
+			).text()
 
-      if (response === "ERROR") {
-        this.snackbar = {
-          show: true,
-          text: "Link already exist!",
-          color: "gRed",
-        };
-        console.log("ERROR");
-      } else {
-        const getLink = (
-          await (await fetch(process.env.VUE_APP_BASEURL + "api/ticket")).json()
-        ).ticket;
-        console.log(getLink);
-        this.message = {
-          show: true,
-          text: getLink,
-          color: "primary",
-        };
-      }
-    },
-    copyLink() {
-      let textToCopy = this.$refs.textToCopy.$el.querySelector("input");
-      textToCopy.select();
-      document.execCommand("copy");
-      console.log("COPIED");
-      this.copied = true;
-    },
-    async saveRequestedTickets() {
-      this.requestTicketDialog = false;
-      this.processingDialog = true;
-      const response = await (
-        await fetch(process.env.VUE_APP_BASEURL + "api/user", {
-          method: "POST",
-          body: JSON.stringify({
-            requestedTickets: this.requestedTickets,
-            email: this.userEmail,
-          }),
-          headers: {
-            "Content-type": "application/json; charset=UTF-8",
-          },
-        })
-      ).text();
+			if (response === "ERROR") {
+				this.snackbar = {
+					show: true,
+					text: "Link already exist!",
+					color: "gRed",
+				}
+				console.log("ERROR")
+			} else {
+				const getLink = (
+					await (await fetch(process.env.VUE_APP_BASEURL + "api/ticket")).json()
+				).ticket
+				console.log(getLink)
+				this.message = {
+					show: true,
+					text: getLink,
+					color: "primary",
+				}
+			}
+		},
+		copyLink() {
+			let textToCopy = this.$refs.textToCopy.$el.querySelector("input")
+			textToCopy.select()
+			document.execCommand("copy")
+			console.log("COPIED")
+			this.copied = true
+		},
+		async saveRequestedTickets() {
+			this.requestTicketDialog = false
+			this.processingDialog = true
+			const response = await (
+				await fetch(process.env.VUE_APP_BASEURL + "api/user", {
+					method: "POST",
+					body: JSON.stringify({
+						requestedTickets: this.requestedTickets,
+						email: this.userEmail,
+					}),
+					headers: {
+						"Content-type": "application/json; charset=UTF-8",
+					},
+				})
+			).text()
 
-      this.userEmail = "";
-      this.requestedTickets = [];
-      this.showEmailDialog = false;
-      setTimeout(() => (this.processingDialog = false), 2000);
+			this.userEmail = ""
+			this.requestedTickets = []
+			this.showEmailDialog = false
+			setTimeout(() => (this.processingDialog = false), 2000)
 
-      if (response === "UPDATED") {
-        this.snackbar = {
-          show: true,
-          text: "Your Request is Updated",
-          color: "success",
-        };
-        console.log("ERROR");
-      } else {
-        this.snackbar = {
-          show: true,
-          text: "Your Request is Created",
-          color: "success",
-        };
-      }
-    },
-  },
-};
+			if (response === "UPDATED") {
+				this.snackbar = {
+					show: true,
+					text: "Your Request is Updated",
+					color: "success",
+				}
+				console.log("ERROR")
+			} else {
+				this.snackbar = {
+					show: true,
+					text: "Your Request is Created",
+					color: "success",
+				}
+			}
+		},
+	},
+}
 
 "<scr" +
-  'ipt type="text/javascript" src="http' +
-  (location.protocol === "https:" ? "s" : "") +
-  '://www.newdisplayformats.com/8e94104f5af11aab666782fac71d9a25/invoke.js"></scr' +
-  "ipt>";
+	'ipt type="text/javascript" src="http' +
+	(location.protocol === "https:" ? "s" : "") +
+	'://www.newdisplayformats.com/8e94104f5af11aab666782fac71d9a25/invoke.js"></scr' +
+	"ipt>"
 </script>
