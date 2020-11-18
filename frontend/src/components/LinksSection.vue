@@ -423,7 +423,6 @@ export default {
 				const getLink = (
 					await (await fetch(process.env.VUE_APP_BASEURL + "api/ticket")).json()
 				).ticket
-				console.log(getLink)
 				this.message = {
 					show: true,
 					text: getLink,
@@ -435,7 +434,6 @@ export default {
 			let textToCopy = this.$refs.textToCopy.$el.querySelector("input")
 			textToCopy.select()
 			document.execCommand("copy")
-			console.log("COPIED")
 			this.copied = true
 		},
 		async saveRequestedTickets() {

@@ -13,7 +13,6 @@ async function websiteHits(req, res, next) {
 }
 
 async function apiHits(req, res, next) {
-	console.log(req.ip)
 	const ip = await TrackIPs.findOne({ where: { ip: req.ip } })
 	if (ip) {
 		ip.apiHits++

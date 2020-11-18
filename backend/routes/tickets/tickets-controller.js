@@ -4,7 +4,7 @@ async function getRandomTicket(req, res) {
 	res.json(
 		await Tickets.findOne({
 			where: {
-				id: Math.floor(Math.random() * Tickets.count()),
+				id: Math.floor(Math.random() * (await Tickets.count())),
 			},
 		})
 	)

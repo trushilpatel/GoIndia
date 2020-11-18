@@ -1,10 +1,5 @@
 const { Users } = require("../../db/sequelize")
 
-async function getAllUsers(req, res) {
-	console.log("GET ALL USERS")
-	//	res.json(await UsersModel.findAll())
-}
-
 async function saveUser(req, res) {
 	try {
 		await Users.build(req.body).save()
@@ -15,6 +10,5 @@ async function saveUser(req, res) {
 }
 
 module.exports = {
-	getAllUsers,
 	saveUser,
 }

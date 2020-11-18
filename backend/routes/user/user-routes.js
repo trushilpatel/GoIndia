@@ -3,6 +3,5 @@ const router = express.Router()
 const userController = require("./user-controller")
 
 router.post("", userController.saveUser)
-router.get("/fetch", userController.getAllUsers)
 
 module.exports = router
