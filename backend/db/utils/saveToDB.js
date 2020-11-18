@@ -10,16 +10,11 @@ async function saveToDB() {
 }
 
 async function saveTickets() {
-	await Promise.all(
-		claimedTickets.map((ticket) =>
-			Tickets.build({ ticket }).save()
-		)
-	)
-	await Promise.all(
-		unclaimedTickets.map((ticket) =>
-			Tickets.build({ ticket }).save()
-		)
-	)
+	let tickets = new Set()
+	claimedTickets.forEach((ticket) => tickets.add(ticket))
+	unclaimedTickets.forEach((ticket) => tickets.add(ticket))
+	tickets = [...tickets]
+	await Promise.all(tickets.map((ticket) => Tickets.build({ ticket }).save()))
 }
 
 // execute function

@@ -131,7 +131,7 @@ module.exports = [
 	"https://gpay.app.goo.gl/AhkahV",
 	"https://gpay.app.goo.gl/42Z5FJ",
 	"https://gpay.app.goo.gl/6CzTCx",
-	" https://gpay.app.goo.gl/Mq4F18",
+	"https://gpay.app.goo.gl/Mq4F18",
 	"https://gpay.app.goo.gl/EmXewJ",
 	"https://gpay.app.goo.gl/DECPST",
 	"https://gpay.app.goo.gl/9WvRDu",
