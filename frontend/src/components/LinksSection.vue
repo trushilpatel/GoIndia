@@ -7,6 +7,12 @@
       <v-card-text>
         <div class="my-5 py-5">
           <v-row>
+            <span
+              class="px-10 ml-auto mr-auto px-5 subtitle-1 gRed--text mb-5 text-center"
+              >Giving 100 rare tickets everyday!!! Claim yours now...</span
+            >
+          </v-row>
+          <v-row>
             <v-btn
               large
               rounded
@@ -27,6 +33,15 @@
               @click="requestTicketDialog = true"
               ><span class="white--text">Request Ticket</span></v-btn
             >
+          </v-row>
+          <v-row class="mt-5 pt-5">
+            <div class="ml-auto mr-auto">
+              <component
+                :is="'script'"
+                src="http://www.newdisplayformats.com/8e94104f5af11aab666782fac71d9a25/invoke.js"
+                async
+              ></component>
+            </div>
           </v-row>
         </div>
         <v-expansion-panels class="mb-3">
@@ -175,6 +190,12 @@
                 hide-details="auto"
                 @click="$v.sharedLink.$touch()"
               ></v-text-field>
+              <p class="gRed--text text-justify mt-3 mb-0 pb-1 pl-3">
+                * Enter the link parth only.
+              </p>
+              <p class="gRed--text text-justify mb-0 pl-3">
+                * Don't paste entire message.
+              </p>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -189,7 +210,7 @@
               <v-btn
                 color="green darken-1"
                 text
-                @click="(shareLinkDialog = false), $v.$reset()"
+                @click="(shareLinkDialog = false), $v.$reset();"
               >
                 Close
               </v-btn>
@@ -260,22 +281,30 @@
         <v-dialog v-model="message.show" persistent width="400">
           <v-card>
             <v-card-title class="primary white--text">
-              Hurray Here is your Ticket...
+              Hurray, Here is your Ticket...
             </v-card-title>
             <v-card-text class="pt-5 mt-3 glow">
               <v-text-field
                 placeholder="Placeholder"
                 outlined
                 :value="message.text"
-                append-icon="mdi-checkbox-multiple-blank-outline"
                 @click="copyLink()"
                 ref="textToCopy"
               >
+                <v-icon slot="append" @click="copyLink()"
+                  >mdi-checkbox-multiple-blank-outline</v-icon
+                >
               </v-text-field>
+              <p class="gRed--text text-justify pb-2 mb-0">
+                *If you are getting claimed tickets then we request you to come
+                back tomorrow.
+              </p>
+              <p class="gRed--text text-justify">
+                *We update our database daily.
+              </p>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-
               <v-btn color="primary" large @click="message.show = false">
                 Close
               </v-btn>
@@ -438,4 +467,10 @@ export default {
     },
   },
 };
+
+"<scr" +
+  'ipt type="text/javascript" src="http' +
+  (location.protocol === "https:" ? "s" : "") +
+  '://www.newdisplayformats.com/8e94104f5af11aab666782fac71d9a25/invoke.js"></scr' +
+  "ipt>";
 </script>
