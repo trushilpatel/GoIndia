@@ -183,9 +183,9 @@
 						</v-card-text>
 					</v-card>
 				</v-dialog>
-				<v-dialog v-model="snackbar.show" persistent width="400">
-					<v-card color="{{snackbar.color}} overline " dark>
-						<v-card-text class="pt-3">
+				<v-dialog v-model="snackbar.show" persistent width="400" class="color">
+					<v-card :color="snackbar.color">
+						<v-card-text class="pt-3 white--text">
 							<span>
 								{{ snackbar.text }}
 							</span>
