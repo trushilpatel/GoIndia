@@ -424,7 +424,7 @@ export default {
 				console.log("ERROR")
 			} else {
 				const getLink = (
-					await (await (process.env.VUE_APP_BASEURL + "api/ticket")).json()
+					await (await fetch(process.env.VUE_APP_BASEURL + "api/ticket")).json()
 				).ticket
 				this.message = {
 					show: true,
