@@ -4,7 +4,7 @@ const express = require("express")
 const cors = require("cors")
 const { websiteHits, apiHits } = require("./middlewares/IPTracking")
 const app = express()
-
+const compression = require("compression")
 // routes
 const ticketsRoutes = require("./routes/tickets/tickets-routes")
 const usersRoutes = require("./routes/user/user-routes")
@@ -21,7 +21,9 @@ if (NODE_ENV != "PRODUCTION") {
 	console.log("::::: CORS :::::")
 	app.use(cors({ origin: "http://localhost:8081" }))
 }
+
 app.use(bodyParser.json())
+app.use(compression())
 app.use(websiteHits, express.static("../frontend/dist"))
 
 app.use("/api/user", apiHits, usersRoutes)
