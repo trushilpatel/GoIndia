@@ -11,7 +11,9 @@ if (!DB_NAME && !DB_PASSWORD && !DB_USER) {
 }
 
 const sequelize = new Sequelize(
-	`postgres://${DB_USER}:${DB_PASSWORD}@localhost:5432/${DB_NAME}`
+	`postgres://${DB_USER}:${DB_PASSWORD}@localhost:5432/${DB_NAME}`, {
+	logging: false
+}
 )
 
 try {
