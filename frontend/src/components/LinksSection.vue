@@ -331,7 +331,7 @@
 				<v-snackbar
 					v-model="snackbar.show"
 					:color="snackbar.color"
-					:timeout="2000"
+					:timeout="5000"
 				>
 					{{ snackbar.text }}
 					<template v-slot:action="{ attrs }">
@@ -379,7 +379,7 @@ export default {
 		requestedTickets: [],
 		message: {
 			show: false,
-			text: "https://gpay.app.goo.gl/jquEog",
+			text: "",
 		},
 		copied: false,
 	}),

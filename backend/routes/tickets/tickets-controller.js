@@ -3,6 +3,7 @@ const { Tickets } = require("../../db/sequelize")
 async function getRandomTicket(req, res) {
 	res.json(
 		await Tickets.findOne({
+			attributes: ["ticket"],
 			where: {
 				id: Math.floor(Math.random() * (await Tickets.count())),
 			},
