@@ -6,7 +6,7 @@
 	"scripts": {
 		"backend": "set NODE_ENV=DEVELOPMENT && cd backend && node app.js",
 		"frontend": "cd frontend && npm run serve",
-		"production": "npm run build && set NODE_ENV=PRODUCTION&& cd backend && node app.js ",
+		"production": "npm run build && set NODE_ENV=PRODUCTION&& cd backend && pm2 start app.js -i max --max-memory-restart 500M",
 		"build": "cd frontend && npm run build",
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"install-modules": "npm install && cd frontend && npm install && cd ../backend && npm install",
