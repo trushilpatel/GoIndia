@@ -183,6 +183,15 @@
 						</v-card-text>
 					</v-card>
 				</v-dialog>
+				<v-dialog v-model="snackbar.show" persistent width="400">
+					<v-card color="{{snackbar.color}} overline " dark>
+						<v-card-text class="pt-3">
+							<span>
+								{{ snackbar.text }}
+							</span>
+						</v-card-text>
+					</v-card>
+				</v-dialog>
 				<v-dialog v-model="shareLinkDialog" persistent width="400">
 					<v-card>
 						<v-card-title class="subtitle green mb-5 white--text">
@@ -328,11 +337,7 @@
 						</v-btn>
 					</template>
 				</v-snackbar>
-				<v-snackbar
-					v-model="snackbar.show"
-					:color="snackbar.color"
-					:timeout="5000"
-				>
+				<v-snackbar v-model="snackbar.show" :color="snackbar.color">
 					{{ snackbar.text }}
 					<template v-slot:action="{ attrs }">
 						<v-btn
@@ -413,15 +418,13 @@ export default {
 			).text()
 
 			if (response === "ERROR") {
-				this.snackbar = {
-					show: true,
-					text: "Link already exist!",
-					color: "gRed",
-				}
+				this.snackbar.show = true
+				this.snackbar.text = "Link already exist!"
+				this.snackbar.color = "gRed"
 				console.log("ERROR")
 			} else {
 				const getLink = (
-					await (await fetch(process.env.VUE_APP_BASEURL + "api/ticket")).json()
+					await (await (process.env.VUE_APP_BASEURL + "api/ticket")).json()
 				).ticket
 				this.message = {
 					show: true,
@@ -458,26 +461,16 @@ export default {
 			setTimeout(() => (this.processingDialog = false), 2000)
 
 			if (response === "UPDATED") {
-				this.snackbar = {
-					show: true,
-					text: "Your Request is Updated",
-					color: "success",
-				}
+				this.snackbar.show = true
+				this.snackbar.text = "Your Request is Updated"
+				this.snackbar.color = "success"
 				console.log("ERROR")
 			} else {
-				this.snackbar = {
-					show: true,
-					text: "Your Request is Created",
-					color: "success",
-				}
+				this.snackbar.show = true
+				this.snackbar.text = "Your Request is Created"
+				this.snackbar.color = "success"
 			}
 		},
 	},
 }
-
-"<scr" +
-	'ipt type="text/javascript" src="http' +
-	(location.protocol === "https:" ? "s" : "") +
-	'://www.newdisplayformats.com/8e94104f5af11aab666782fac71d9a25/invoke.js"></scr' +
-	"ipt>"
 </script>
