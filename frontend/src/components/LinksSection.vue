@@ -432,6 +432,7 @@ export default {
 					color: "primary",
 				}
 			}
+			setTimeout(() => (this.snackbar.show = false), 1500)
 		},
 		copyLink() {
 			let textToCopy = this.$refs.textToCopy.$el.querySelector("input")
@@ -470,6 +471,7 @@ export default {
 				this.snackbar.text = "Your Request is Created"
 				this.snackbar.color = "success"
 			}
+			setTimeout(() => (this.snackbar.show = false), 1500)
 		},
 	},
 }
