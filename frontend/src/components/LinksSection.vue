@@ -30,8 +30,12 @@
 							color="gBlue"
 							class="px-10 mt-5 ml-auto mr-auto"
 							elevation="7"
-							@click="requestTicketDialog = true"
-							><span class="white--text">Request Ticket</span></v-btn
+							@click="
+								;(requestTicketDialog = true),
+									(show_ADS_direct_link = !show_ADS_direct_link)
+							"
+						>
+							<span class="white--text">Request Ticket</span></v-btn
 						>
 					</v-row>
 					<v-row class="mt-5 pt-5">
@@ -387,6 +391,7 @@ export default {
 			text: "https://gpay.app.goo.gl/jquEog",
 		},
 		copied: false,
+		show_ADS_direct_link: false,
 	}),
 	validations: {
 		sharedLink: {
@@ -396,6 +401,16 @@ export default {
 		userEmail: {
 			required: required,
 			email: email,
+		},
+	},
+	watch: {
+		show_ADS_direct_link: function() {
+			if (this.show_ADS_direct_link) {
+				window.open(
+					"https://www.profitablecpmnetwork.com/idpgwnfh?key=c972ab790d274d50884428ed9b781f8a",
+					"_blank"
+				)
+			}
 		},
 	},
 	methods: {
