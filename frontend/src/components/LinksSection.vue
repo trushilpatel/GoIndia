@@ -8,7 +8,7 @@
 				<div class="my-5 py-5">
 					<v-row>
 						<span
-							class="px-10 ml-auto mr-auto px-5 subtitle-1 gRed--text mb-5 text-center"
+							class="px-10 ml-auto mr-auto px-5 subtitle-1 gRed--text mb-5 text-center pb-2"
 							>Giving 100 rare tickets everyday!!! Claim yours now...</span
 						>
 					</v-row>
@@ -35,7 +35,13 @@
 							<span class="white--text">Request Ticket</span></v-btn
 						>
 					</v-row>
-					<v-row class="mt-5 pt-5">
+					<v-row>
+						<span
+							class="mt-5 pt-1 px-10 ml-auto mr-auto px-5 subtitle-1 gRed--text text-center"
+							>Everyday new tickets are added...</span
+						>
+					</v-row>
+					<v-row class="mt-5 pt-3">
 						<div class="ml-auto mr-auto">
 							<component
 								:is="'script'"
