@@ -11,7 +11,7 @@ module.exports = {
 			field: "id",
 		},
 		ip: {
-			type: DataTypes.STRING(20),
+			type: DataTypes.STRING(30),
 			allowNull: false,
 			unique: true,
 			field: "ip",
