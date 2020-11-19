@@ -10,13 +10,6 @@
 		<v-main app class="mt-5">
 			<LinksSection />
 		</v-main>
-		<component
-			:is="'script'"
-			src="http://pl15936290.profitablecpmnetwork.com/3b93dc0799d6b8567493835bb0de1595/invoke.js"
-			data-cfasync="false"
-			async
-		>
-		</component>
 		<div id="container-3b93dc0799d6b8567493835bb0de1595"></div>
 		<v-footer class="center py-3 mt-3">
 			<template>

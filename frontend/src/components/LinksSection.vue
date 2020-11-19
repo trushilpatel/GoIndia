@@ -41,15 +41,6 @@
 							>Everyday new tickets are added...</span
 						>
 					</v-row>
-					<v-row class="mt-5 pt-3">
-						<div class="ml-auto mr-auto">
-							<component
-								:is="'script'"
-								src="http://www.newdisplayformats.com/8e94104f5af11aab666782fac71d9a25/invoke.js"
-								async
-							></component>
-						</div>
-					</v-row>
 				</div>
 				<v-expansion-panels class="mb-3">
 					<v-expansion-panel>
